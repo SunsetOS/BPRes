@@ -1,5 +1,7 @@
 import pandas as pd
 
-
-data = pd.read_excel(r"./drop/01.xlsx")
-data.to_csv("drop\\01.csv",index=False)
+def ReadFile():
+    for i in range(1,11):
+        data = pd.read_excel(f'./notdrop/{i:0>2d}.xlsx')
+        data.to_csv(f'./output/notdrop/{i:0>2d}.csv', index=False)
+        print("File", i, "is converted to csv")
