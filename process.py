@@ -8,6 +8,21 @@ def ConverFile():
 
 def ModifyCSV():
     for i in range(1,11):
+        with open(f'./PostProcess/output/drop/{i:0>2d}.csv', 'r') as f:
+            reader = csv.reader(f)
+            data = list(reader)
+            data.pop(0)
+
+            for j in data:
+                j.pop(0)
+                j.pop(0)
+                j.pop(0)
+            with open(f'./PostProcess/noheader/drop/{i:0>2d}.csv', 'w', newline = '') as f:
+                writer = csv.writer(f)
+                writer.writerows(data)
+            print("File", i, "save to csv")
+
+    for i in range(1,11):
         with open(f'./PostProcess/output/notdrop/{i:0>2d}.csv', 'r') as f:
             reader = csv.reader(f)
             data = list(reader)
@@ -23,6 +38,7 @@ def ModifyCSV():
             print("File", i, "save to csv")
 
 def Mark():
+
     for i in range(1,11):
         with open(f'./PostProcess/noheader/notdrop/{i:0>2d}.csv', 'r') as f:
             reader = csv.reader(f)
@@ -32,7 +48,8 @@ def Mark():
             with open(f'./PostProcess/noheader/notdrop/{i:0>2d}.csv', 'w', newline = "") as f:
                 writer = csv.writer(f)
                 writer.writerows(data)
-            print("File", i, "is tagged")
+            print("File", i, "is marked")
+
     for i in range(1,11):
         with open(f'./PostProcess/noheader/drop/{i:0>2d}.csv', 'r') as f:
             reader = csv.reader(f)
@@ -42,6 +59,6 @@ def Mark():
             with open(f'./PostProcess/noheader/drop/{i:0>2d}.csv', 'w', newline = "") as f:
                 writer = csv.writer(f)
                 writer.writerows(data)
-            print("File", i, "is tagged")
+            print("File", i, "is marked")
 
-ModifyCSV()
+Mark()
